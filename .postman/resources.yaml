@@ -1,0 +1,13 @@
+# Use this workspace to collaborate
+workspace:
+  id: 1059f90d-ab6c-4f1a-83de-fa6d652bc3aa
+
+localResources:
+  collections:
+    - ../character-api/Character API Backend Testing
+
+# Each entry here maps a local resource to one or more corresponding objects in Postman Cloud
+
+cloudResources:
+  collections:
+    ../postman/collections/Character API Backend Testing: 16c409e8-7430-483e-bbb2-3cfbf816f097

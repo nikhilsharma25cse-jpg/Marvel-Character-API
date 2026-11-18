@@ -1,0 +1,9 @@
+$kind: collection
+description: Local Postman requests for the Marvel Character API. Set the email and password collection variables to a test account you control before running the collection.
+variables:
+  baseUrl: http://localhost:5000
+  email: ""
+  password: ""
+  tonyId: ""
+  natashaId: ""
+  strangeId: ""

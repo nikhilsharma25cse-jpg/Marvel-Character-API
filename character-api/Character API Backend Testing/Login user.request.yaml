@@ -1,0 +1,23 @@
+$kind: http-request
+url: "{{baseUrl}}/api/auth/login"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "email": "{{email}}",
+      "password": "{{password}}"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Login returns 200', function () {
+        pm.response.to.have.status(200);
+      });
+      pm.test('Password is not returned', function () {
+        pm.expect(pm.response.text()).not.to.include('password');
+      });
+    language: text/javascript
+order: 3000

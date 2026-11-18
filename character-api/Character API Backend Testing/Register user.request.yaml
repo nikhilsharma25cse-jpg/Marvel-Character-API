@@ -1,0 +1,24 @@
+$kind: http-request
+url: "{{baseUrl}}/api/auth/register"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Marvel API Tester",
+      "email": "{{email}}",
+      "password": "{{password}}"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Registration returns 201', function () {
+        pm.response.to.have.status(201);
+      });
+      pm.test('Password is not returned', function () {
+        pm.expect(pm.response.text()).not.to.include('password');
+      });
+    language: text/javascript
+order: 2000

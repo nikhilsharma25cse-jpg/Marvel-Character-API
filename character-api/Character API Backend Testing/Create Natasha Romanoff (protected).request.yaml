@@ -1,0 +1,29 @@
+$kind: http-request
+url: "{{baseUrl}}/api/characters"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Natasha Romanoff",
+      "alias": "Black Widow",
+      "team": "Avengers",
+      "powers": [
+        "Master martial artist",
+        "Espionage",
+        "Marksmanship"
+      ],
+      "description": "Former intelligence operative turned Avenger, known for close-quarters combat and spycraft.",
+      "firstAppearance": 1964
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Natasha Romanoff is created with 201', function () {
+        pm.response.to.have.status(201);
+      });
+      pm.collectionVariables.set('natashaId', pm.response.json().character._id);
+    language: text/javascript
+order: 7000

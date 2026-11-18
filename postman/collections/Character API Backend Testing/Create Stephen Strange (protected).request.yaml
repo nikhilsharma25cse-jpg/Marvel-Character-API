@@ -1,0 +1,29 @@
+$kind: http-request
+url: "{{baseUrl}}/api/characters"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Stephen Strange",
+      "alias": "Doctor Strange",
+      "team": "Defenders",
+      "powers": [
+        "Sorcery",
+        "Astral projection",
+        "Time manipulation"
+      ],
+      "description": "Neurosurgeon who becomes a master of the mystic arts after losing the use of his hands.",
+      "firstAppearance": 1963
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Stephen Strange is created with 201', function () {
+        pm.response.to.have.status(201);
+      });
+      pm.collectionVariables.set('strangeId', pm.response.json().character._id);
+    language: text/javascript
+order: 8000

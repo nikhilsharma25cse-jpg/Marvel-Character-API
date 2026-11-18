@@ -1,0 +1,21 @@
+$kind: http-request
+url: "{{baseUrl}}/api/characters"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Unauthenticated Test",
+      "alias": "Test",
+      "description": "This request should be rejected because it has no login cookie."
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Protected create after logout returns 401', function () {
+        pm.response.to.have.status(401);
+      });
+    language: text/javascript
+order: 13000

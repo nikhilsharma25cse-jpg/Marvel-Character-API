@@ -1,0 +1,29 @@
+$kind: http-request
+url: "{{baseUrl}}/api/characters"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Tony Stark",
+      "alias": "Iron Man",
+      "team": "Avengers",
+      "powers": [
+        "Powered armour suit",
+        "Genius-level intellect",
+        "Flight"
+      ],
+      "description": "Billionaire engineer who builds a powered exoskeleton and leads the Avengers.",
+      "firstAppearance": 1963
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Tony Stark is created with 201', function () {
+        pm.response.to.have.status(201);
+      });
+      pm.collectionVariables.set('tonyId', pm.response.json().character._id);
+    language: text/javascript
+order: 6000
